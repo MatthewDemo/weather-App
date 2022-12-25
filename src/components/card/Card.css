@@ -1,0 +1,61 @@
+.card {
+  flex-direction: row;
+  list-style-type: none;
+  transition: transform 0.1s;
+  margin-left: 30px;
+  height: 200px;
+  width: 210px;
+  background-color: rgba(7, 2, 17, 0.308);
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 30px;
+  float: left;
+
+  -webkit-box-shadow: 21px 17px 25px -1px rgba(0, 0, 0, 0.47);
+  -moz-box-shadow: 21px 17px 25px -1px rgba(0, 0, 0, 0.47);
+  box-shadow: 21px 17px 25px -1px rgba(0, 0, 0, 0.47);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.deleteBtn {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  height: 18px;
+  opacity: 0.4;
+}
+.deleteBtn:hover {
+  opacity: 0.9;
+}
+
+.reloadBtn {
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  height: 35px;
+  opacity: 0.4;
+}
+.reloadBtn:hover {
+  opacity: 0.9;
+}
+
+.currentTemp {
+  font-size: 50px;
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  color: rgb(233, 233, 233);
+}
+
+.currentCity {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: rgb(233, 233, 233);
+  font-weight: 500;
+}
