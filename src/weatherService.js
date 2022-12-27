@@ -18,6 +18,7 @@ const getFormattedWeatherData = async (city, units = "metric") => {
     name,
   } = data;
 
+
   const { description, icon } = weather[0];
 
   return {

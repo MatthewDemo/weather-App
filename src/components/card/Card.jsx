@@ -1,9 +1,13 @@
 import "./Card.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setItems, setIndex } from "../../redux/slices/weatherSlice";
 
+const Card = ({ item, i }) => {
+  const { items } = useSelector((state) => state.weather);
+  const dispatch = useDispatch();
 
-const Card = ({ item, weather, setWeather, idx }) => {
   const deleteItem = (e) => {
-    setWeather(weather.filter((city) => city.name !== item.name));
+    dispatch(setItems(items.filter((city) => city.name !== item.name)));
     if (e.target.className === "deleteBtn") {
       e.preventDefault();
     }
@@ -15,11 +19,13 @@ const Card = ({ item, weather, setWeather, idx }) => {
   };
 
   return (
-    <div onClick={() => console.log(idx)} className="card">
-      <h1 className="currentTemp">{Math.round(item.temp)} °C</h1>
-      <p className="currentCity">
-        {item.name}, {item.country}
-      </p>
+    <div className="card" onClick={() => dispatch(setIndex(i))}>
+      {<h1 className="currentTemp"> {Math.round(item.temp)} °C</h1>}
+      {
+        <p className="currentCity">
+          {item.name}, {item.country}
+        </p>
+      }
 
       <img
         className="reloadBtn"

@@ -1,24 +1,26 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import "./Info.css";
 
-const Info = ({ weather }) => {
-  console.log(weather);
+const Info = () => {
+  const { index, items } = useSelector((state) => state.weather);
+
   return (
     <div className="mainInfopage">
       <div className="lightSpace">
         <h1>
-          {weather[0].name}, {weather[0].country}
+          {items[index].name}, {items[index].country}
         </h1>
-        <p>Temperature: {Math.round(weather[0].temp)} ℃</p>
-        <p>Feels like: {Math.round(weather[0].feels_like)} ℃</p>
+        <p>Temperature: {Math.round(items[index].temp)} ℃</p>
+        <p>Feels like: {Math.round(items[index].feels_like)} ℃</p>
         <p>
-          Temp min: {Math.round(weather[0].temp_min)} ℃/ temp max {Math.round(weather[0].temp_max)} ℃
+          Temp min: {Math.round(items[index].temp_min)} ℃/ temp max{" "}
+          {Math.round(items[index].temp_max)} ℃
         </p>
-        <p>Humidity: {weather[0].humidity} %</p>
-        <p>Pressure: {weather[0].pressure} mmHg</p>
-        <p>Wind: {weather[0].speed} m/sec</p>
+        <p>Humidity: {items[index].humidity} %</p>
+        <p>Pressure: {items[index].pressure} mmHg</p>
+        <p>Wind: {items[index].speed} m/sec</p>
 
         <Link to="/">
           <img
