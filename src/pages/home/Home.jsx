@@ -10,8 +10,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const { items, inputValue } = useSelector((state) => state.weather);
 
+
   useEffect(() => {
-    dispatch(fetchWeather(inputValue));
+    try {
+      inputValue && dispatch(fetchWeather(inputValue));
+    } catch (error) {
+      console.log('Нет данных для выполнения запроса')
+    }
   }, [inputValue]);
 
   const cards = items.map((item, i) => (
@@ -19,6 +24,8 @@ const Home = () => {
       <Card item={item} i={i} />
     </Link>
   ));
+
+  //  console.log(new Set(items))
 
   return (
     <div className="App">

@@ -40,8 +40,13 @@ export const fetchWeather = createAsyncThunk(
   }
 );
 
+const itemsLS =
+  localStorage.getItem("allCities") !== null
+    ? JSON.parse(localStorage.getItem("allCities"))
+    : [];
+
 const initialState = {
-  items: [],
+  items: itemsLS,
   inputValue: null,
   status: null,
   error: null,
@@ -54,6 +59,7 @@ export const weatherSlice = createSlice({
   reducers: {
     setItems: (state, action) => {
       state.items = action.payload;
+      localStorage.setItem("allCities", JSON.stringify(state.items));
     },
     setInputValue: (state, action) => {
       state.inputValue = action.payload;
@@ -68,7 +74,12 @@ export const weatherSlice = createSlice({
     },
     [fetchWeather.fulfilled]: (state, action) => {
       state.status = "success";
+      state.items = state.items.filter(
+        (item) => item.name !== action.payload.name
+      );
       state.items = [...state.items, action.payload];
+
+      localStorage.setItem("allCities", JSON.stringify(state.items));
     },
     [fetchWeather.rejected]: (state) => {
       state.status = "error";
