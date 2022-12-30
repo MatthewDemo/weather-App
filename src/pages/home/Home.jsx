@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import React from "react";
 import Card from "../../components/card/Card";
 import Header from "../../components/header/Header";
 import "./Home.css";
@@ -10,12 +11,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const { items, inputValue } = useSelector((state) => state.weather);
 
-
   useEffect(() => {
     try {
       inputValue && dispatch(fetchWeather(inputValue));
     } catch (error) {
-      console.log('Нет данных для выполнения запроса')
+      console.log("Нет данных для выполнения запроса");
     }
   }, [inputValue]);
 
@@ -24,8 +24,6 @@ const Home = () => {
       <Card item={item} i={i} />
     </Link>
   ));
-
-  //  console.log(new Set(items))
 
   return (
     <div className="App">
