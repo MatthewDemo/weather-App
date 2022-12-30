@@ -1,5 +1,5 @@
 import { setInputValue } from "../../redux/slices/weatherSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const Header = () => {
@@ -9,7 +9,6 @@ const Header = () => {
   const enterPushed = (e) => {
     if (e.keyCode === 13 ) {
       dispatch(setInputValue(e.target.value))
-      // e.target.value = ''
     };
   };
   const enterUp = (e) => {

@@ -5,9 +5,10 @@ import {
   setIndex,
   fetchWeather,
 } from "../../redux/slices/weatherSlice";
+import StateInterface from "../../interfaces/StateInterface";
 
 const Card = ({ item, i }) => {
-  const { items } = useSelector((state) => state.weather);
+  const { items } = useSelector((state: any): StateInterface => state.weather);
   const dispatch = useDispatch();
 
   const deleteItem = (e) => {

@@ -1,7 +1,7 @@
 .card {
   flex-direction: row;
   list-style-type: none;
-  transition: transform 0.1s;
+  transition: transform 0.4s;
   margin-left: 30px;
   height: 200px;
   width: 210px;

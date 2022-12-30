@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import StateInterface from "../../interfaces/StateInterface";
 import "./Info.css";
 
 const Info = () => {
-  const { index, items } = useSelector((state) => state.weather);
+  const { index, items } = useSelector(
+    (state: any): StateInterface => state.weather
+  );
 
   return (
     <div className="mainInfopage">

@@ -1,13 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, Action } from "@reduxjs/toolkit";
+import ItemInterface from "../../interfaces/ItemInterface";
+import StateInterface from "../../interfaces/StateInterface";
 
 const API_KEY = "8c76bc5561dc57f5228e5cd8bdbd4147";
 
-const makeIconURL = (iconId) =>
+const makeIconURL = (iconId : string) : string =>
   `https://openweathermap.org/img/wn/${iconId}@2x.png`;
 
-export const fetchWeather = createAsyncThunk(
+export const fetchWeather: any = createAsyncThunk(
   "weather/fetchWeather",
-  async (city) => {
+  async (city): Promise<ItemInterface>  => {
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
 
     const data = await fetch(URL)
@@ -36,16 +38,16 @@ export const fetchWeather = createAsyncThunk(
       speed,
       country,
       name,
-    };
+    } as ItemInterface;
   }
 );
 
-const itemsLS =
+const itemsLS : ItemInterface[] =
   localStorage.getItem("allCities") !== null
     ? JSON.parse(localStorage.getItem("allCities"))
     : [];
 
-const initialState = {
+const initialState : StateInterface = {
   items: itemsLS,
   inputValue: null,
   status: null,
@@ -57,22 +59,22 @@ export const weatherSlice = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    setItems: (state, action) => {
+    setItems: (state: StateInterface, action: {payload: ItemInterface[], type: string}) : void => {
       state.items = action.payload;
       localStorage.setItem("allCities", JSON.stringify(state.items));
     },
-    setInputValue: (state, action) => {
+    setInputValue: (state: StateInterface, action: {payload: string, type: string}): void => {
       state.inputValue = action.payload;
     },
-    setIndex: (state, action) => {
+    setIndex: (state: StateInterface, action: {payload: number, type: string}): void => {
       state.index = action.payload;
     },
   },
   extraReducers: {
-    [fetchWeather.pending]: (state) => {
+    [fetchWeather.pending]: (state: StateInterface): void => {
       state.status = "loading";
     },
-    [fetchWeather.fulfilled]: (state, action) => {
+    [fetchWeather.fulfilled]: (state: StateInterface, action: {payload: ItemInterface, type: string}) => {
       state.status = "success";
       state.items = state.items.filter(
         (item) => item.name !== action.payload.name
@@ -81,7 +83,7 @@ export const weatherSlice = createSlice({
 
       localStorage.setItem("allCities", JSON.stringify(state.items));
     },
-    [fetchWeather.rejected]: (state) => {
+    [fetchWeather.rejected]: (state: StateInterface) => {
       state.status = "error";
     },
   },
